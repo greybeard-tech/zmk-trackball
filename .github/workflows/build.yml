@@ -1,0 +1,35 @@
+name: Build ZMK Firmware
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: pip install west
+
+      - run: git clone https://github.com/zmkfirmware/zmk.git
+
+      - run: |
+          cd zmk
+          west init -l app
+          west update
+
+      - uses: zephyrproject-rtos/action-zephyr-setup@v1
+        with:
+          sdk-version: 0.16.5
+
+      - run: pip install -r zmk/zephyr/scripts/requirements.txt
+
+      - run: |
+          cd zmk
+          west build -s app -b nice_nano -- -DZMK_CONFIG=../config
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: firmware
+          path: zmk/build/zephyr/zmk.uf2
