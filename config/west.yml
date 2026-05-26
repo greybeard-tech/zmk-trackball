@@ -1,0 +1,10 @@
+manifest:
+  version: "0.7"
+
+  projects:
+    - name: zmk
+      url: https://github.com/zmkfirmware/zmk
+      revision: main
+
+  self:
+    path: config
