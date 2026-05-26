@@ -1,0 +1,36 @@
+/ {
+    chosen {
+        zmk,kscan = &buttons;
+    };
+
+    buttons {
+        compatible = "gpio-keys";
+
+        btn1: button_1 { gpios = <&gpio0 2 GPIO_ACTIVE_LOW>; };
+        btn2: button_2 { gpios = <&gpio0 3 GPIO_ACTIVE_LOW>; };
+        btn3: button_3 { gpios = <&gpio0 4 GPIO_ACTIVE_LOW>; };
+        btn4: button_4 { gpios = <&gpio0 5 GPIO_ACTIVE_LOW>; };
+        btn5: button_5 { gpios = <&gpio0 28 GPIO_ACTIVE_LOW>; };
+        btn6: button_6 { gpios = <&gpio0 29 GPIO_ACTIVE_LOW>; };
+    };
+};
+
+&spi1 {
+    status = "okay";
+
+    pmw3389: pmw3389@0 {
+        compatible = "pixart,pmw3389";
+        reg = <0>;
+        spi-max-frequency = <2000000>;
+
+        cs-gpios = <&gpio0 6 GPIO_ACTIVE_LOW>;
+        motion-gpios = <&gpio0 15 GPIO_ACTIVE_LOW>;
+    };
+};
+
+/ {
+    pointing {
+        compatible = "zmk,pointing-device";
+        device = <&pmw3389>;
+    };
+};
