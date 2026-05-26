@@ -1,0 +1,16 @@
+/ {
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            bindings = <
+                &mkp BTN_LEFT
+                &mkp BTN_RIGHT
+                &mkp BTN_MIDDLE
+                &kp PAGE_UP
+                &kp PAGE_DOWN
+                &kp ENTER
+            >;
+        };
+    };
+};
