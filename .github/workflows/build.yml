@@ -16,7 +16,7 @@ jobs:
 
       - run: |
           cd zmk
-          west init -l .
+          west init -l app
           west update
 
       - uses: zephyrproject-rtos/action-zephyr-setup@v1
