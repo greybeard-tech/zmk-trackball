@@ -46,4 +46,3 @@ jobs:
         with:
           name: firmware
           path: zmk/build/zephyr/zmk.uf2
-``
